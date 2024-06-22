@@ -37,10 +37,8 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           tags: |
             type=raw,value=rootfs
-          flavor: |
-            latest=true
       - name: Build and push Docker images
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           cache-from: type=gha
           cache-to: type=gha,mode=min
@@ -48,6 +46,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           push: false
+          load: true
           tags: ${{ steps.meta.outputs.tags }}
       - name: make
         run: make rootfs create push
