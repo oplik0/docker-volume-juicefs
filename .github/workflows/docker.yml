@@ -37,18 +37,18 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           tags: |
             type=raw,value=rootfs
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v6
-        with:
-          cache-from: type=gha
-          cache-to: type=gha,mode=min
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: false
-          load: true
-          tags: ${{ steps.meta.outputs.tags }}
+      # - name: Build and push Docker images
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     cache-from: type=gha
+      #     cache-to: type=gha,mode=min
+      #     context: .
+      #     file: ./Dockerfile
+      #     platforms: linux/amd64,linux/arm64
+      #     push: false
+      #     load: true
+      #     tags: ${{ steps.meta.outputs.tags }}
       - name: make
-        run: make rootfs create push
+        run: make build rootfs create push
         env:
           PLUGIN_NAME: ghcr.io/${{ github.repository }}
