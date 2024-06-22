@@ -10,7 +10,7 @@ clean:
 
 build:
 	@echo "### docker build: rootfs image with docker-volume-juicefs"
-	@docker buildx build --platform=linux/amd64,linux/arm64 --load --build-arg="JUICEFS_CE_VERSION=${JUICEFS_CE_VERSION}" -t ${PLUGIN_NAME}:rootfs .
+	@docker buildx build --platform=linux/arm64 --load --build-arg="JUICEFS_CE_VERSION=${JUICEFS_CE_VERSION}" -t ${PLUGIN_NAME}:rootfs .
 rootfs:
 	@echo "### create rootfs directory in ./plugin/rootfs"
 	@mkdir -p ./plugin/rootfs
