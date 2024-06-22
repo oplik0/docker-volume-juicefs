@@ -49,6 +49,6 @@ jobs:
       #     load: true
       #     tags: ${{ steps.meta.outputs.tags }}
       - name: make
-        run: make build rootfs create push
-        env:
-          PLUGIN_NAME: ghcr.io/${{ github.repository }}
+        run: |
+          make PLUGIN_NAME=ghcr.io/${{ github.repository }}
+          make push PLUGIN_NAME=ghcr.io/${{ github.repository }}
