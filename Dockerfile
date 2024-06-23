@@ -10,7 +10,7 @@ ENV JUICEFS_CE_VERSION=${JUICEFS_CE_VERSION:-"1.1.3"}
 WORKDIR /docker-volume-juicefs
 COPY . .
 RUN echo "deb http://deb.debian.org/debian bookworm-backports main" | tee -a /etc/apt/sources.list && \
-    apt-get update && apt-get install -y curl musl-tools tar gzip upx-ucl/bookworm-backports && \
+    apt-get update && apt-get install -y curl musl-tools tar gzip upx-ucl/bookworm-backports libc6 libc6-dev && \
     CC=/usr/bin/musl-gcc go build -o bin/docker-volume-juicefs --ldflags '-linkmode external -extldflags "-static"' .
 
 WORKDIR /workspace
