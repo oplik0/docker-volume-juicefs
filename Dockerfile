@@ -20,6 +20,7 @@ RUN curl -fsSL -o juicefs-ce.tar.gz https://github.com/juicedata/juicefs/release
     chmod +x /juicefs
 
 FROM python:3-alpine
+RUN apk add libc6-compat
 RUN mkdir -p /run/docker/plugins /jfs/state /jfs/volumes
 COPY --from=builder /docker-volume-juicefs/bin/docker-volume-juicefs /
 COPY --from=builder /tmp/juicefs /bin/
