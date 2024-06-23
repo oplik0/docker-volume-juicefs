@@ -1,7 +1,7 @@
 FROM golang:1.22 as builder
 
-ARG ARCH
-ENV ARCH=${ARCH:-"amd64"}
+ARG TARGETARCH
+ENV TARGETARCH=${TARGETARCH:-"amd64"}
 ARG GOPROXY
 ENV GOPROXY=${GOPROXY:-"https://proxy.golang.org,direct"}
 ARG JUICEFS_CE_VERSION
@@ -14,7 +14,7 @@ RUN echo "deb http://deb.debian.org/debian bookworm-backports main" | tee -a /et
     CC=/usr/bin/musl-gcc go build -o bin/docker-volume-juicefs --ldflags '-linkmode external -extldflags "-static"' .
 
 WORKDIR /workspace
-RUN curl -fsSL -o juicefs-ce.tar.gz https://github.com/juicedata/juicefs/releases/download/v${JUICEFS_CE_VERSION}/juicefs-${JUICEFS_CE_VERSION}-linux-${ARCH}.tar.gz && \
+RUN curl -fsSL -o juicefs-ce.tar.gz https://github.com/juicedata/juicefs/releases/download/v${JUICEFS_CE_VERSION}/juicefs-${JUICEFS_CE_VERSION}-linux-${TARGETARCH}.tar.gz && \
     tar -zxf juicefs-ce.tar.gz -C /tmp && \
     curl -fsSL -o /juicefs https://s.juicefs.com/static/juicefs && \
     chmod +x /juicefs
