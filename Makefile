@@ -1,6 +1,6 @@
 PLUGIN_NAME = juicedata/juicefs
 PLUGIN_TAG = latest
-rootfs: JUICEFS_CE_VERSION ?= $(shell curl -s https://api.github.com/repos/juicedata/juicefs/releases/latest | grep 'tag_name' | cut -d '"' -f 4 | tr -d 'v')
+build: JUICEFS_CE_VERSION ?= $(shell curl -s https://api.github.com/repos/juicedata/juicefs/releases/latest | grep 'tag_name' | cut -d '"' -f 4 | tr -d 'v')
 
 all: clean build rootfs create
 
